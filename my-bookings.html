@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>My Bookings — Farhan Fades</title>
+<meta name="description" content="Look up, reschedule or cancel your Farhan Fades appointment in Limerick." />
+<link rel="icon" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#171412; --panel:#211c18; --cream:#f2e8d5; --sand:#e6d7bb;
+    --red:#e6262f; --red-dim:#b3121a; --oxblood:#6e2a22;
+    --muted:#9b8d76; --line:#332b23; --white:#fbf7ef;
+    --shadow:0 20px 50px -20px rgba(0,0,0,.55); --radius:12px;
+    --sans:"DM Sans",system-ui,sans-serif; --display:"Bebas Neue",Impact,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth;background:var(--ink);padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  body{font-family:var(--sans);color:var(--cream);background:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
+  body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--ink);z-index:99}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  .wrap{width:min(760px,92vw);margin-inline:auto}
+  h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.02em;line-height:1.05}
+  .eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:.68rem;color:var(--red);font-weight:600}
+
+  .announce{background:var(--red);color:var(--white);text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:.55rem calc(1rem + env(safe-area-inset-left)) .55rem calc(1rem + env(safe-area-inset-right));padding-top:calc(.55rem + env(safe-area-inset-top));margin-top:calc(-1 * env(safe-area-inset-top));position:relative;z-index:100}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(23,20,18,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+  .logo{font-family:var(--display);font-size:1.7rem;letter-spacing:.06em;color:var(--cream)}
+  .logo span{color:var(--red)}
+  .back{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand)}
+  .back:hover{color:var(--red)}
+
+  .page{padding:3rem 0 5rem}
+  .page-head{text-align:center;margin-bottom:2.2rem}
+  .page-head h1{font-size:clamp(2.4rem,5vw,3.4rem);color:var(--white);margin-top:.5rem}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:2rem}
+  .field label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem}
+  .field input{width:100%;padding:.95rem 1rem;border:1px solid var(--line);border-radius:8px;background:var(--ink);color:var(--cream);font-family:inherit;font-size:1.05rem;letter-spacing:.1em;text-transform:uppercase}
+  .field input:focus{outline:none;border-color:var(--red)}
+  .field-err{border-color:var(--oxblood)!important}
+  .err-msg{color:#d9897e;font-size:.78rem;margin-top:.3rem}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 1.6rem;border-radius:8px;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;transition:.25s}
+  .btn-red{background:var(--red);color:var(--white)}
+  .btn-red:hover{background:var(--cream);color:var(--ink)}
+  .btn-ghost{color:var(--muted);border:1px solid var(--line)}
+  .btn-ghost:hover{color:var(--cream);border-color:var(--sand)}
+  .btn-sm{padding:.55rem 1rem;font-size:.7rem}
+
+  .booking{border:1px solid var(--line);border-radius:10px;padding:1.4rem;margin-bottom:1rem;background:var(--ink)}
+  .booking .top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
+  .booking .ref{font-family:var(--display);font-size:1.5rem;color:var(--red);letter-spacing:.1em}
+  .booking .svc{font-size:1.1rem;color:var(--white);margin-top:.2rem}
+  .booking .meta{font-size:.85rem;color:var(--muted);margin-top:.3rem}
+  .booking .acts{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+  .booking .pill{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;padding:.3rem .7rem;border-radius:999px;border:1px solid var(--line);color:var(--sand);align-self:flex-start}
+
+  .empty{text-align:center;color:var(--muted);padding:2rem 0}
+  .empty h3{font-size:1.6rem;color:var(--white);margin-bottom:.5rem}
+  .site-note{text-align:center;color:var(--muted);font-size:.78rem;margin-top:1.4rem}
+
+  .toast{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%) translateY(140%);background:var(--red);color:var(--white);font-weight:700;font-size:.85rem;padding:.9rem 1.6rem;border-radius:999px;transition:.35s;z-index:200;box-shadow:var(--shadow)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<div class="announce">Walk-ins welcome · Open 7 days · Roches Street, Limerick</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo">Farhan <span>Fades</span></a>
+    <a class="back" href="index.html">← Back to site</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">Manage your visit</span>
+      <h1>My bookings</h1>
+    </div>
+
+    <div class="panel" id="lookupPanel">
+      <p style="color:var(--muted);font-size:.92rem;margin-bottom:1.2rem">Enter the reference from your confirmation (looks like <b style="color:var(--sand)">FF-AB12C</b>) to view, reschedule or cancel.</p>
+      <div class="field">
+        <label for="refInput">Booking reference</label>
+        <input id="refInput" type="text" placeholder="FF-AB12C" autocomplete="off" />
+      </div>
+      <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.2rem">
+        <button class="btn btn-red" id="findBtn">Find my booking</button>
+        <button class="btn btn-ghost" id="allBtn">Show all on this device</button>
+      </div>
+    </div>
+
+    <div id="results" style="margin-top:1.6rem"></div>
+
+    <p class="site-note">Demo system — bookings live in this browser only. Nothing is sent to the shop.</p>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="catalog.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+
+const fmtDate = key => new Date(key + "T12:00:00").toLocaleDateString("en-IE",{weekday:"long",day:"numeric",month:"long"});
+
+function bookingCard(b){
+  const s = svc(b.service), st = styleById(b.style);
+  const barber = b.barber === "any" ? "First available" : (barberById(b.barber) ? barberById(b.barber).name : b.barber);
+  return `
+    <div class="booking" data-ref="${b.ref}">
+      <div class="top">
+        <div>
+          <div class="ref">${b.ref}</div>
+          <div class="svc">${s ? s.name : b.service} · ${st ? st.name : b.style}</div>
+          <div class="meta">${fmtDate(b.date)} at ${b.time} · with ${barber}</div>
+          <div class="meta">${b.name} · ${b.phone}</div>
+        </div>
+        <span class="pill">${s ? "€" + s.price : ""} · ~${b.mins} min</span>
+      </div>
+      <div class="acts">
+        <button class="btn btn-ghost btn-sm" data-reschedule="${b.ref}">Reschedule</button>
+        <button class="btn btn-red btn-sm" data-cancel="${b.ref}">Cancel booking</button>
+      </div>
+    </div>`;
+}
+
+function renderList(list){
+  const el = $("#results");
+  if (!list.length){
+    el.innerHTML = `<div class="empty"><h3>No bookings found</h3><p>Check the reference and try again — it's on your confirmation screen.</p></div>`;
+    return;
+  }
+  el.innerHTML = list.map(bookingCard).join("");
+}
+
+function findRef(){
+  const input = $("#refInput");
+  input.classList.remove("field-err");
+  const val = input.value.trim();
+  if (!val){ input.classList.add("field-err"); return; }
+  const b = findBookingByRef(val);
+  renderList(b ? [b] : []);
+}
+
+$("#findBtn").addEventListener("click", findRef);
+$("#refInput").addEventListener("keydown", e => { if (e.key === "Enter") findRef(); });
+$("#allBtn").addEventListener("click", () => {
+  const all = upcomingBookings();
+  renderList(all);
+});
+
+$("#results").addEventListener("click", e => {
+  const cancel = e.target.closest("[data-cancel]");
+  const resched = e.target.closest("[data-reschedule]");
+  if (cancel){
+    const ref = cancel.dataset.cancel;
+    if (confirm("Cancel booking " + ref + "?")){
+      cancelBooking(ref);
+      toast("Booking " + ref + " cancelled");
+      findRef();
+    }
+  }
+  if (resched){
+    // carry the service + style into a fresh booking
+    const b = findBookingByRef(resched.dataset.reschedule);
+    if (b){
+      cancelBooking(b.ref);
+      location.href = `book.html?service=${b.service}&style=${b.style}`;
+    }
+  }
+});
+
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3200);
+}
+</script>
+</body>
+</html>

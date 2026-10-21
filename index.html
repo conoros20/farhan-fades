@@ -113,12 +113,59 @@
   .toast{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%) translateY(140%);background:var(--red);color:var(--white);font-weight:700;font-size:.85rem;padding:.9rem 1.6rem;border-radius:999px;transition:.35s;z-index:200;box-shadow:var(--shadow)}
   .toast.show{transform:translateX(-50%) translateY(0)}
 
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+  .gallery a{border-radius:10px;overflow:hidden;display:block;aspect-ratio:1}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:.4s}
+  .gallery a:hover img{transform:scale(1.06)}
+
+  /* vouchers */
+  .vouchers{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .voucher{background:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:1.8rem 1.4rem;text-align:center;position:relative;overflow:hidden;transition:.25s}
+  .voucher::before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:var(--red)}
+  .voucher:hover{border-color:var(--red);transform:translateY(-4px)}
+  .voucher .amt{font-family:var(--display);font-size:2.6rem;color:var(--red);line-height:1}
+  .voucher h3{font-size:1.2rem;color:var(--white);margin:.5rem 0 .4rem}
+  .voucher p{font-size:.84rem;color:var(--muted);margin-bottom:1.2rem}
+  .voucher .btn{width:100%;padding:.7rem 1rem;font-size:.72rem}
+
+  /* faq */
+  .faq{max-width:820px;margin-inline:auto}
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;text-align:left;padding:1.3rem .2rem;font-size:1.02rem;color:var(--cream);font-weight:600}
+  .faq-q:hover{color:var(--red)}
+  .faq-q .ic{color:var(--red);font-size:1.4rem;flex-shrink:0;transition:.25s}
+  .faq-item.open .faq-q .ic{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--muted);font-size:.92rem}
+  .faq-item.open .faq-a{max-height:320px}
+  .faq-a p{padding:0 .2rem 1.3rem}
+
+  /* social */
+  .socials{display:flex;gap:.7rem;margin-top:1rem}
+  .socials a{width:2.4rem;height:2.4rem;border-radius:8px;border:1px solid var(--line);display:grid;place-items:center;color:var(--sand);transition:.2s}
+  .socials a:hover{border-color:var(--red);color:var(--red)}
+  .socials svg{width:1.1rem;height:1.1rem;fill:currentColor}
+
+  /* map */
+  .map-wrap{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-top:1.4rem}
+  .map-wrap iframe{width:100%;height:240px;border:0;display:block;filter:grayscale(.3)}
+
+  /* floating actions */
+  .fabs{position:fixed;right:1.2rem;bottom:1.2rem;display:flex;flex-direction:column;gap:.7rem;z-index:150}
+  .fabs a{width:3.2rem;height:3.2rem;border-radius:50%;display:grid;place-items:center;box-shadow:var(--shadow);transition:.2s;color:#fff}
+  .fabs a:hover{transform:scale(1.08)}
+  .fabs .wa{background:#25d366}
+  .fabs .call{background:var(--red)}
+  .fabs svg{width:1.4rem;height:1.4rem;fill:currentColor}
+
   @media(max-width:960px){
     .hero-grid{grid-template-columns:1fr}
     .hero-img{order:-1}.hero-img img{height:340px}
     .services{grid-template-columns:repeat(2,1fr)}
     .styles-grid{grid-template-columns:repeat(2,1fr)}
     .reviews{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .vouchers{grid-template-columns:repeat(2,1fr)}
     .barbers{grid-template-columns:1fr}
     .hours-cta{grid-template-columns:1fr;padding:2rem}
     .foot-grid{grid-template-columns:1fr}
@@ -133,6 +180,38 @@
     .styles-grid{grid-template-columns:1fr}
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Farhan Fades",
+  "alternateName": "Limerick Fades",
+  "image": "https://picsum.photos/seed/farhan-shop/800/900",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "53 Roches St, Prior's-Land",
+    "addressLocality": "Limerick",
+    "postalCode": "V94 XP83",
+    "addressCountry": "IE"
+  },
+  "telephone": "+353833126955",
+  "url": "https://www.facebook.com/akhtarbarber",
+  "priceRange": "€€",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.6",
+    "reviewCount": "126"
+  },
+  "openingHoursSpecification": [
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"19:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:30","closes":"19:00"}
+  ],
+  "potentialAction": {
+    "@type": "ReserveAction",
+    "target": "book.html"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -144,8 +223,12 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#services">Services</a></li>
       <li><a href="#styles">Styles</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#barbers">Our Barbers</a></li>
+      <li><a href="#vouchers">Gift Cards</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#visit">Visit</a></li>
+      <li><a href="my-bookings.html">My Bookings</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:1rem">
       <a class="btn btn-red" href="book.html">Book a chair</a>
@@ -204,6 +287,20 @@
   </div>
 </section>
 
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Our work</span>
+      <h2>The lookbook</h2>
+      <p>A taste of what leaves the chair. Tap a cut to book that style.</p>
+    </div>
+    <div class="gallery" id="galleryGrid"></div>
+    <div style="text-align:center;margin-top:1.6rem">
+      <a class="btn btn-red" href="book.html?style=fade">Book this look</a>
+    </div>
+  </div>
+</section>
+
 <section id="reviews" style="background:var(--panel)">
   <div class="wrap">
     <div class="sec-head">
@@ -215,6 +312,27 @@
   </div>
 </section>
 
+<section id="vouchers">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The easy gift</span>
+      <h2>Gift vouchers</h2>
+      <p>Never know what to get him? A voucher always fits. Redeemable against any service, valid 12 months.</p>
+    </div>
+    <div class="vouchers" id="voucherGrid"></div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Good to know</span>
+      <h2>Frequently asked</h2>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
 <section id="visit">
   <div class="wrap">
     <div class="hours-cta">
@@ -223,10 +341,23 @@
         <h2>Opening hours</h2>
         <ul class="hours-list" id="hoursList"></ul>
         <p class="addr"><b>Farhan Fades</b> <span style="color:var(--muted)">(Limerick Fades)</span><br />53 Roches St, Prior's-Land<br />Limerick, V94 XP83<br /><a href="tel:+353833126955">083 312 6955</a></p>
-        <a class="btn btn-red" style="margin-top:1.4rem" href="book.html">Book a chair</a>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem">
+          <a class="btn btn-red" href="book.html">Book a chair</a>
+          <a class="btn btn-outline" href="https://maps.google.com/?q=53+Roches+St,+Limerick,+V94+XP83" target="_blank" rel="noopener">Get directions</a>
+        </div>
+        <div class="socials" aria-label="Social links">
+          <a href="https://www.facebook.com/akhtarbarber" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.1h-3.1V8.9c0-.9.25-1.5 1.55-1.5H16.7V4.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v2.3H7.6V14h2.7v8h3.2Z"/></svg></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.56.22.96.48 1.38.9.42.42.68.82.9 1.38.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2a3.7 3.7 0 0 1-.9 1.38c-.42.42-.82.68-1.38.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2Zm0 1.8c-3.14 0-3.5 0-4.74.07-.9.04-1.38.19-1.7.31-.43.17-.74.37-1.06.69-.32.32-.52.63-.69 1.06-.12.32-.27.8-.31 1.7C3.43 8.9 3.42 9.26 3.42 12s0 3.1.07 4.34c.04.9.19 1.38.31 1.7.17.43.37.74.69 1.06.32.32.63.52 1.06.69.32.12.8.27 1.7.31 1.24.07 1.6.07 4.74.07s3.5 0 4.74-.07c.9-.04 1.38-.19 1.7-.31.43-.17.74-.37 1.06-.69.32-.32.52-.63.69-1.06.12-.32.27-.8.31-1.7.07-1.24.07-1.6.07-4.34s0-3.1-.07-4.34c-.04-.9-.19-1.38-.31-1.7a2.85 2.85 0 0 0-.69-1.06 2.85 2.85 0 0 0-1.06-.69c-.32-.12-.8-.27-1.7-.31C15.5 4 15.14 4 12 4Zm0 3.06A4.94 4.94 0 1 1 12 17a4.94 4.94 0 0 1 0-9.88Zm0 1.8a3.14 3.14 0 1 0 0 6.28 3.14 3.14 0 0 0 0-6.28Zm5.15-.4a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0Z"/></svg></a>
+          <a href="https://wa.me/353833126955" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-2.6.7.7-2.5-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3 4.2c-.2 0-.5.1-.7.4-.25.3-.9 1-.9 2.3s.9 2.6 1 2.8c.15.2 1.8 2.9 4.5 3.9 2.2.8 2.6.7 3.1.6.5 0 1.6-.6 1.8-1.2.2-.6.2-1.1.15-1.2-.05-.1-.2-.15-.4-.25l-1.6-.8c-.2-.1-.4-.1-.55.1l-.75.95c-.15.15-.3.2-.55.1-.25-.15-1.1-.4-2.1-1.3-.8-.7-1.3-1.55-1.45-1.8-.15-.25 0-.4.1-.5l.35-.4c.1-.15.15-.25.25-.4.05-.15.02-.3-.03-.4l-.7-1.7c-.2-.45-.4-.4-.55-.4h-.45Z"/></svg></a>
+        </div>
       </div>
-      <div class="hero-img">
-        <img src="https://picsum.photos/seed/farhan-shop/800/900" alt="Inside the barbershop" style="height:100%;min-height:360px;object-fit:cover" />
+      <div>
+        <div class="hero-img">
+          <img src="https://picsum.photos/seed/farhan-shop/800/900" alt="Inside the barbershop" style="height:100%;min-height:360px;object-fit:cover" />
+        </div>
+        <div class="map-wrap">
+          <iframe title="Map to Farhan Fades, 53 Roches St, Limerick" loading="lazy" src="https://www.google.com/maps?q=53+Roches+St,+Limerick,+V94+XP83&output=embed"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -263,6 +394,11 @@
     </div>
   </div>
 </footer>
+
+<div class="fabs">
+  <a class="wa" href="https://wa.me/353833126955" target="_blank" rel="noopener" aria-label="WhatsApp us"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2Zm0 1.8a8.2 8.2 0 0 1 0 16.4 8.1 8.1 0 0 1-4.2-1.2l-.3-.2-2.6.7.7-2.5-.2-.3A8.2 8.2 0 0 1 12 3.8Zm-3 4.2c-.2 0-.5.1-.7.4-.25.3-.9 1-.9 2.3s.9 2.6 1 2.8c.15.2 1.8 2.9 4.5 3.9 2.2.8 2.6.7 3.1.6.5 0 1.6-.6 1.8-1.2.2-.6.2-1.1.15-1.2-.05-.1-.2-.15-.4-.25l-1.6-.8c-.2-.1-.4-.1-.55.1l-.75.95c-.15.15-.3.2-.55.1-.25-.15-1.1-.4-2.1-1.3-.8-.7-1.3-1.55-1.45-1.8-.15-.25 0-.4.1-.5l.35-.4c.1-.15.15-.25.25-.4.05-.15.02-.3-.03-.4l-.7-1.7c-.2-.45-.4-.4-.55-.4h-.45Z"/></svg></a>
+  <a class="call" href="tel:+353833126955" aria-label="Call the shop"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.27-.27.67-.35 1-.23 1.1.36 2.3.56 3.5.56.55 0 1 .45 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5c.55 0 1 .45 1 1 0 1.2.2 2.4.56 3.5.12.33.04.73-.23 1l-2.23 2.3Z"/></svg></a>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -317,6 +453,37 @@ $("#reviewGrid").innerHTML = REVIEWS.map(r => `
     <p>“${r.text}”</p>
     <div class="who">— ${r.who}</div>
   </div>`).join("");
+
+/* gallery */
+$("#galleryGrid").innerHTML = GALLERY.map((g,i) => `
+  <a href="book.html?style=${STYLES[i % STYLES.length].id}" aria-label="${g.alt}">
+    <img src="${g.img}" alt="${g.alt}" loading="lazy" />
+  </a>`).join("");
+
+/* vouchers */
+$("#voucherGrid").innerHTML = VOUCHERS.map(v => `
+  <div class="voucher">
+    <div class="amt">${money(v.value)}</div>
+    <h3>${v.label}</h3>
+    <p>${v.desc}</p>
+    <a class="btn btn-red" href="book.html?voucher=${v.value}">Buy voucher</a>
+  </div>`).join("");
+
+/* faq */
+$("#faqList").innerHTML = FAQS.map((f,i) => `
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false" data-faq="${i}">
+      <span>${f.q}</span><span class="ic">+</span>
+    </button>
+    <div class="faq-a"><p>${f.a}</p></div>
+  </div>`).join("");
+$("#faqList").addEventListener("click", e => {
+  const q = e.target.closest(".faq-q");
+  if (!q) return;
+  const item = q.parentElement;
+  const open = item.classList.toggle("open");
+  q.setAttribute("aria-expanded", open);
+});
 
 function toast(msg){
   const t = $("#toast");

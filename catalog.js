@@ -39,6 +39,35 @@ const REVIEWS = [
   { text:"Amazing barber, friendly and welcoming and professional at every level. Top notch.", who:"Verified customer" },
 ];
 
+const FAQS = [
+  { q:"Do you take walk-ins?", a:"Yes — walk-ins are always welcome. Booking online just means you skip the wait; there's no surcharge either way." },
+  { q:"How long does a cut take?", a:"A classic cut runs about 30 minutes, a skin fade 45, and a cut plus beard around an hour. Your booking shows the estimated time." },
+  { q:"Do I need to pay a deposit?", a:"No deposit needed. You pay in the shop after your cut — we take cash and card." },
+  { q:"What's your cancellation policy?", a:"Plans change — just give us at least 2 hours' notice and we'll rebook you free. No-shows and same-day cancellations may be charged 50%." },
+  { q:"Can I bring my child?", a:"Of course. Kids' cuts are €18 and our barbers are used to wriggly customers. Under-12s get the same care, smaller chairs." },
+  { q:"Where can I park?", a:"There's street parking on Roches Street and the multi-storey on nearby Upper Cecil Street, a two-minute walk away." },
+  { q:"Do you cut all hair types?", a:"Yes — from straight and wavy to tight curls and afro hair. If you're unsure, book a consultation and we'll talk it through first." },
+  { q:"Can I pay by card or contactless?", a:"Cash, card and contactless are all accepted. Gift vouchers can be redeemed against any service." },
+];
+
+const VOUCHERS = [
+  { value:25, label:"A fresh cut",        desc:"One classic cut or kids' cut." },
+  { value:42, label:"Cut + beard",        desc:"The full works — cut and beard sculpt." },
+  { value:60, label:"Gentleman's bundle", desc:"Two cuts, or one cut plus a hot towel shave." },
+  { value:100,label:"The big one",        desc:"Four cuts, or spoil someone for months." },
+];
+
+const GALLERY = [
+  { img:"https://picsum.photos/seed/farhan-g1/600/600", alt:"Skin fade with textured top" },
+  { img:"https://picsum.photos/seed/farhan-g2/600/600", alt:"Classic scissor cut" },
+  { img:"https://picsum.photos/seed/farhan-g3/600/600", alt:"Beard sculpt and line-up" },
+  { img:"https://picsum.photos/seed/farhan-g4/600/600", alt:"Pompadour with taper" },
+  { img:"https://picsum.photos/seed/farhan-g5/600/600", alt:"Buzz cut with skin fade sides" },
+  { img:"https://picsum.photos/seed/farhan-g6/600/600", alt:"Curly top shape-up" },
+  { img:"https://picsum.photos/seed/farhan-g7/600/600", alt:"Side part and hot towel finish" },
+  { img:"https://picsum.photos/seed/farhan-g8/600/600", alt:"Textured crop with fringe" },
+];
+
 /* Real opening hours — public listing: findglocal (53 Roches St, Limerick) */
 const HOURS = [
   { day:"Monday",    open:["09:00","19:00"] },
@@ -67,7 +96,7 @@ const SHOP = {
   maps:"https://maps.google.com/?q=53+Roches+St,+Limerick,+V94+XP83",
 };
 
-const money = n => `$${n}`;
+const money = n => `€${n}`;
 const svc = id => SERVICES.find(s => s.id === id);
 const styleById = id => STYLES.find(s => s.id === id);
 const barberById = id => BARBERS.find(b => b.id === id);
@@ -92,6 +121,27 @@ function slotTaken(dateStr, timeStr, barberId) {
     b.date === dateStr && b.time === timeStr &&
     (barberId === "any" || b.barber === "any" || b.barber === barberId)
   );
+}
+
+function findBookingByRef(ref) {
+  const r = String(ref || "").trim().toUpperCase();
+  return loadBookings().find(b => b.ref === r) || null;
+}
+
+function cancelBooking(ref) {
+  const all = loadBookings();
+  const i = all.findIndex(b => b.ref === String(ref || "").trim().toUpperCase());
+  if (i === -1) return false;
+  all.splice(i, 1);
+  localStorage.setItem(BOOK_KEY, JSON.stringify(all));
+  return true;
+}
+
+function upcomingBookings() {
+  const today = new Date().toISOString().slice(0, 10);
+  return loadBookings()
+    .filter(b => b.date >= today)
+    .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
 }
 
 /* Generate time slots for a given date (open 7 days — see HOURS) */

@@ -204,6 +204,7 @@
       <p id="doneSummary"></p>
       <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
         <a class="btn btn-red" href="index.html">Back to the shop</a>
+        <a class="btn btn-ghost" href="my-bookings.html">Manage booking</a>
         <button class="btn btn-ghost" id="againBtn">Book another</button>
       </div>
       <p class="demo-note">Demo system — clear your browser data or book again to reset. See you in the chair.</p>
@@ -413,6 +414,12 @@ function toast(msg){
 if (booking.service && booking.style) goStep(3);
 else if (booking.service) goStep(2);
 else goStep(1);
+
+/* gift voucher deep link: show a note, then let them book the service to redeem */
+const voucherAmt = params.get("voucher");
+if (voucherAmt){
+  toast(`€${voucherAmt} gift voucher — pick the service to redeem it`);
+}
 </script>
 </body>
 </html>
