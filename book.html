@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Book a Chair — Oakwood Barbers</title>
+<meta name="description" content="Book a haircut, fade, beard sculpt or hot towel shave at Oakwood Barbers, Dublin 8." />
+<link rel="icon" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#171412; --panel:#211c18; --cream:#f2e8d5; --sand:#e6d7bb;
+    --brass:#c9963f; --brass-dim:#a87b2e; --oxblood:#6e2a22;
+    --muted:#9b8d76; --line:#332b23; --white:#fbf7ef;
+    --shadow:0 20px 50px -20px rgba(0,0,0,.55); --radius:12px;
+    --sans:"DM Sans",system-ui,sans-serif; --display:"Bebas Neue",Impact,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth;background:var(--ink);padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  body{font-family:var(--sans);color:var(--cream);background:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
+  body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--ink);z-index:99}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  .wrap{width:min(900px,92vw);margin-inline:auto}
+  h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.02em;line-height:1.05}
+  .eyebrow{text-transform:uppercase;letter-spacing:.3em;font-size:.68rem;color:var(--brass);font-weight:600}
+
+  .announce{background:var(--brass);color:var(--ink);text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:.55rem calc(1rem + env(safe-area-inset-left)) .55rem calc(1rem + env(safe-area-inset-right));padding-top:calc(.55rem + env(safe-area-inset-top));margin-top:calc(-1 * env(safe-area-inset-top));position:relative;z-index:100}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(23,20,18,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:.9rem 0}
+  .logo{font-family:var(--display);font-size:1.7rem;letter-spacing:.06em;color:var(--cream)}
+  .logo span{color:var(--brass)}
+  .back{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand)}
+  .back:hover{color:var(--brass)}
+
+  .page{padding:3rem 0 5rem}
+  .page-head{text-align:center;margin-bottom:2.5rem}
+  .page-head h1{font-size:clamp(2.4rem,5vw,3.6rem);color:var(--white);margin-top:.5rem}
+
+  .steps{display:flex;justify-content:center;gap:.5rem;margin-bottom:2.5rem;flex-wrap:wrap}
+  .step-pill{display:flex;align-items:center;gap:.5rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:.45rem .9rem;border:1px solid var(--line);border-radius:999px}
+  .step-pill .num{width:1.35rem;height:1.35rem;border-radius:50%;background:var(--line);color:var(--muted);display:grid;place-items:center;font-size:.68rem;font-weight:700}
+  .step-pill.active{color:var(--ink);background:var(--brass);border-color:var(--brass)}
+  .step-pill.active .num{background:var(--ink);color:var(--brass)}
+  .step-pill.done{color:var(--brass);border-color:var(--brass-dim)}
+  .step-pill.done .num{background:var(--brass);color:var(--ink)}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:2rem}
+  .panel h2{font-size:1.9rem;color:var(--white);margin-bottom:1.4rem}
+  .grid-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem}
+  .pick{border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.2rem;text-align:left;transition:.2s;background:var(--ink);display:flex;flex-direction:column;gap:.25rem}
+  .pick:hover{border-color:var(--brass-dim)}
+  .pick.sel{border-color:var(--brass);background:rgba(201,150,63,.08)}
+  .pick h3{font-size:1.25rem;color:var(--white)}
+  .pick .meta{font-size:.78rem;color:var(--brass);font-weight:600}
+  .pick p{font-size:.82rem;color:var(--muted)}
+  .pick img{width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:.5rem}
+
+  .chiprow{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.4rem}
+  .chip{padding:.55rem 1.1rem;border-radius:999px;border:1px solid var(--line);font-size:.8rem;color:var(--sand);transition:.2s}
+  .chip:hover{border-color:var(--brass-dim)}
+  .chip.sel{background:var(--brass);color:var(--ink);border-color:var(--brass);font-weight:700}
+  .chip[disabled]{opacity:.3;cursor:not-allowed}
+
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:.55rem;margin-top:1rem}
+  .slot{padding:.65rem 0;border:1px solid var(--line);border-radius:8px;font-size:.85rem;color:var(--sand);transition:.15s;text-align:center}
+  .slot:hover:not([disabled]){border-color:var(--brass)}
+  .slot.sel{background:var(--brass);color:var(--ink);border-color:var(--brass);font-weight:700}
+  .slot[disabled]{opacity:.25;cursor:not-allowed;text-decoration:line-through}
+
+  .fields{display:grid;gap:1rem}
+  .field label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem}
+  .field input,.field textarea{width:100%;padding:.9rem 1rem;border:1px solid var(--line);border-radius:8px;background:var(--ink);color:var(--cream);font-family:inherit;font-size:.95rem}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--brass)}
+  .field-err{border-color:var(--oxblood)!important}
+  .err-msg{color:#d9897e;font-size:.78rem;margin-top:.3rem}
+
+  .summary{border:1px dashed var(--brass-dim);border-radius:10px;padding:1.3rem 1.4rem;margin-bottom:1.4rem;font-size:.92rem}
+  .summary .row{display:flex;justify-content:space-between;padding:.3rem 0;color:var(--sand)}
+  .summary .row b{color:var(--white)}
+  .summary .total{border-top:1px solid var(--line);margin-top:.5rem;padding-top:.7rem;font-family:var(--display);font-size:1.3rem;color:var(--brass)}
+
+  .actions{display:flex;justify-content:space-between;gap:1rem;margin-top:1.8rem;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 2rem;border-radius:8px;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;transition:.25s}
+  .btn-brass{background:var(--brass);color:var(--ink)}
+  .btn-brass:hover{background:var(--cream)}
+  .btn-brass[disabled]{opacity:.4;cursor:not-allowed}
+  .btn-ghost{color:var(--muted);border:1px solid var(--line)}
+  .btn-ghost:hover{color:var(--cream);border-color:var(--sand)}
+
+  .done-card{text-align:center;padding:3rem 2rem}
+  .done-card .tick{width:74px;height:74px;border-radius:50%;background:var(--brass);color:var(--ink);display:grid;place-items:center;font-size:2.2rem;margin:0 auto 1.4rem}
+  .done-card h2{font-size:2.4rem;color:var(--white)}
+  .done-card .ref{font-family:var(--display);font-size:1.6rem;color:var(--brass);letter-spacing:.1em;margin:.8rem 0}
+  .done-card p{color:var(--muted);max-width:44ch;margin:0 auto 1.6rem}
+
+  .demo-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:1.2rem}
+  .toast{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%) translateY(140%);background:var(--brass);color:var(--ink);font-weight:700;font-size:.85rem;padding:.9rem 1.6rem;border-radius:999px;transition:.35s;z-index:200;box-shadow:var(--shadow)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:640px){
+    .grid-cards{grid-template-columns:1fr}
+    .panel{padding:1.4rem}
+    .actions{flex-direction:column-reverse}
+    .actions .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">Walk-ins welcome · Tue–Sat · Book online &amp; skip the wait</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo">Oakwood <span>Barbers</span></a>
+    <a class="back" href="index.html">← Back to site</a>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <span class="eyebrow">Reserve your slot</span>
+      <h1>Book a chair</h1>
+    </div>
+
+    <div class="steps" id="steps">
+      <div class="step-pill active" data-step="1"><span class="num">1</span> Service</div>
+      <div class="step-pill" data-step="2"><span class="num">2</span> Style</div>
+      <div class="step-pill" data-step="3"><span class="num">3</span> Barber</div>
+      <div class="step-pill" data-step="4"><span class="num">4</span> Date &amp; time</div>
+      <div class="step-pill" data-step="5"><span class="num">5</span> Your details</div>
+    </div>
+
+    <!-- STEP 1: service -->
+    <div class="panel" id="step1">
+      <h2>What are we doing today?</h2>
+      <div class="grid-cards" id="svcPicks"></div>
+      <div class="actions"><span></span><button class="btn btn-brass" id="toStep2" disabled>Next — pick a style</button></div>
+    </div>
+
+    <!-- STEP 2: style -->
+    <div class="panel" id="step2" hidden>
+      <h2>Point at the one you want</h2>
+      <div class="grid-cards" id="stylePicks"></div>
+      <div class="actions">
+        <button class="btn btn-ghost" data-back="1">← Back</button>
+        <button class="btn btn-brass" id="toStep3" disabled>Next — pick your barber</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: barber -->
+    <div class="panel" id="step3" hidden>
+      <h2>Who's got the chair?</h2>
+      <div class="grid-cards" id="barberPicks"></div>
+      <div class="actions">
+        <button class="btn btn-ghost" data-back="2">← Back</button>
+        <button class="btn btn-brass" id="toStep4" disabled>Next — pick a time</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: date & time -->
+    <div class="panel" id="step4" hidden>
+      <h2>When suits?</h2>
+      <div class="chiprow" id="dateChips"></div>
+      <div id="slotWrap" hidden>
+        <div style="font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)">Available times</div>
+        <div class="slots" id="slotGrid"></div>
+      </div>
+      <p id="closedMsg" hidden style="color:var(--muted);font-size:.9rem;margin-top:1rem">We're closed that day — the shop runs Tuesday to Saturday. Try another date above.</p>
+      <div class="actions">
+        <button class="btn btn-ghost" data-back="3">← Back</button>
+        <button class="btn btn-brass" id="toStep5" disabled>Next — your details</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: details + confirm -->
+    <div class="panel" id="step5" hidden>
+      <h2>Almost in the chair</h2>
+      <div class="summary" id="summary"></div>
+      <div class="fields">
+        <div class="field"><label for="bName">Name</label><input id="bName" type="text" placeholder="Your name" autocomplete="name" /></div>
+        <div class="field"><label for="bPhone">Phone</label><input id="bPhone" type="tel" placeholder="087 123 4567" autocomplete="tel" /></div>
+        <div class="field"><label for="bEmail">Email</label><input id="bEmail" type="email" placeholder="you@example.com" autocomplete="email" /></div>
+        <div class="field"><label for="bNotes">Notes for your barber (optional)</label><textarea id="bNotes" rows="2" placeholder="Growing it out, first time with a fade, allergies…"></textarea></div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" data-back="4">← Back</button>
+        <button class="btn btn-brass" id="confirmBtn">Confirm booking</button>
+      </div>
+      <p class="demo-note">Demo booking system — nothing is sent anywhere. Your appointment lives in this browser only.</p>
+    </div>
+
+    <!-- DONE -->
+    <div class="panel done-card" id="donePanel" hidden>
+      <div class="tick">✓</div>
+      <h2>You're booked in</h2>
+      <div class="ref" id="doneRef"></div>
+      <p id="doneSummary"></p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-brass" href="index.html">Back to the shop</a>
+        <button class="btn btn-ghost" id="againBtn">Book another</button>
+      </div>
+      <p class="demo-note">Demo system — clear your browser data or book again to reset. See you in the chair.</p>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script src="catalog.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+const booking = { service:null, style:null, barber:null, date:null, time:null };
+let step = 1;
+
+/* deep-link preselects: book.html?service=fade&style=fade */
+const params = new URLSearchParams(location.search);
+if (params.get("service") && svc(params.get("service"))) booking.service = params.get("service");
+if (params.get("style") && styleById(params.get("style"))) booking.style = params.get("style");
+
+/* ---------- render picks ---------- */
+$("#svcPicks").innerHTML = SERVICES.map(s => `
+  <button class="pick ${booking.service===s.id?"sel":""}" data-svc="${s.id}">
+    <span class="meta">${s.mins} min · ${money(s.price)}</span>
+    <h3>${s.name}</h3>
+    <p>${s.desc}</p>
+  </button>`).join("");
+
+$("#stylePicks").innerHTML = STYLES.map(s => `
+  <button class="pick ${booking.style===s.id?"sel":""}" data-style="${s.id}">
+    <img src="${s.img}" alt="${s.name}" loading="lazy" />
+    <h3>${s.name}</h3>
+    <p>${s.desc}</p>
+  </button>`).join("");
+
+$("#barberPicks").innerHTML = BARBERS.map(b => `
+  <button class="pick ${booking.barber===b.id?"sel":""}" data-barber="${b.id}">
+    <img src="${b.img}" alt="${b.name}" loading="lazy" />
+    <h3>${b.name}</h3>
+    <span class="meta">${b.role}</span>
+    <p>${b.speciality}</p>
+  </button>`).join("") + `
+  <button class="pick ${booking.barber==="any"?"sel":""}" data-barber="any">
+    <h3>First available</h3>
+    <span class="meta">Whoever's free</span>
+    <p>Best chance of getting today's slot. You'll get whoever's free — they're all good.</p>
+  </button>`;
+
+/* ---------- selection handlers ---------- */
+document.addEventListener("click", e => {
+  const p = e.target.closest(".pick");
+  if (!p) return;
+  const panel = p.closest(".panel");
+  panel.querySelectorAll(".pick").forEach(x => x.classList.remove("sel"));
+  p.classList.add("sel");
+  if (p.dataset.svc){ booking.service = p.dataset.svc; $("#toStep2").disabled = false; }
+  if (p.dataset.style){ booking.style = p.dataset.style; $("#toStep3").disabled = false; }
+  if (p.dataset.barber){ booking.barber = p.dataset.barber; $("#toStep4").disabled = false; }
+});
+
+/* preselect state on load */
+$("#toStep2").disabled = !booking.service;
+$("#toStep3").disabled = !booking.style;
+$("#toStep4").disabled = !booking.barber;
+
+/* ---------- step navigation ---------- */
+function goStep(n){
+  step = n;
+  for (let i=1;i<=5;i++) $("#step"+i).hidden = i!==n;
+  $("#donePanel").hidden = true;
+  $$(".step-pill").forEach(p => {
+    const s = +p.dataset.step;
+    p.classList.toggle("active", s===n);
+    p.classList.toggle("done", s<n);
+  });
+  if (n===4) renderDates();
+  if (n===5) renderSummary();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+$("#toStep2").addEventListener("click", () => goStep(2));
+$("#toStep3").addEventListener("click", () => goStep(3));
+$("#toStep4").addEventListener("click", () => goStep(4));
+$("#toStep5").addEventListener("click", () => goStep(5));
+$$("[data-back]").forEach(b => b.addEventListener("click", () => goStep(+b.dataset.back)));
+
+/* ---------- dates & slots ---------- */
+function renderDates(){
+  const chips = $("#dateChips");
+  chips.innerHTML = "";
+  const today = new Date();
+  let shown = 0;
+  for (let i=0; i<21 && shown<10; i++){
+    const d = new Date(today); d.setDate(today.getDate()+i);
+    const key = d.toISOString().slice(0,10);
+    const slots = slotsFor(key);
+    if (!slots.length) continue; // closed days skipped
+    const label = i===0 ? "Today" : i===1 ? "Tomorrow" : d.toLocaleDateString("en-IE",{weekday:"short",day:"numeric",month:"short"});
+    const chip = document.createElement("button");
+    chip.className = "chip" + (booking.date===key ? " sel" : "");
+    chip.textContent = label;
+    chip.addEventListener("click", () => {
+      booking.date = key; booking.time = null;
+      chips.querySelectorAll(".chip").forEach(c => c.classList.remove("sel"));
+      chip.classList.add("sel");
+      renderSlots(key);
+      $("#toStep5").disabled = true;
+    });
+    chips.appendChild(chip);
+    shown++;
+  }
+  if (booking.date) renderSlots(booking.date);
+  else { $("#slotWrap").hidden = true; $("#closedMsg").hidden = true; }
+}
+
+function renderSlots(dateKey){
+  const slots = slotsFor(dateKey);
+  const grid = $("#slotGrid");
+  if (!slots.length){
+    $("#slotWrap").hidden = true; $("#closedMsg").hidden = false; return;
+  }
+  $("#closedMsg").hidden = true; $("#slotWrap").hidden = false;
+  const now = new Date();
+  const isToday = dateKey === now.toISOString().slice(0,10);
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  grid.innerHTML = slots.map(t => {
+    const [h,m] = t.split(":").map(Number);
+    const past = isToday && (h*60+m) < nowMin + 60; // 1h lead time
+    const taken = slotTaken(dateKey, t, booking.barber);
+    const dis = past || taken;
+    return `<button class="slot ${booking.time===t?"sel":""}" data-t="${t}" ${dis?"disabled":""} title="${taken?"Already booked":past?"Too soon":""}">${t}</button>`;
+  }).join("");
+  grid.querySelectorAll(".slot:not([disabled])").forEach(b => b.addEventListener("click", () => {
+    booking.time = b.dataset.t;
+    grid.querySelectorAll(".slot").forEach(x => x.classList.remove("sel"));
+    b.classList.add("sel");
+    $("#toStep5").disabled = false;
+  }));
+}
+
+/* ---------- summary ---------- */
+function renderSummary(){
+  const s = svc(booking.service), st = styleById(booking.style);
+  const b = booking.barber === "any" ? {name:"First available"} : barberById(booking.barber);
+  const d = new Date(booking.date + "T12:00:00").toLocaleDateString("en-IE",{weekday:"long",day:"numeric",month:"long"});
+  $("#summary").innerHTML = `
+    <div class="row"><span>Service</span><b>${s.name}</b></div>
+    <div class="row"><span>Style</span><b>${st.name}</b></div>
+    <div class="row"><span>Barber</span><b>${b.name}</b></div>
+    <div class="row"><span>When</span><b>${d} · ${booking.time}</b></div>
+    <div class="row"><span>Duration</span><b>~${s.mins} min</b></div>
+    <div class="row total"><span>Pay in shop</span><b>${money(s.price)}</b></div>`;
+}
+
+/* ---------- confirm ---------- */
+$("#confirmBtn").addEventListener("click", () => {
+  const name = $("#bName"), phone = $("#bPhone"), email = $("#bEmail");
+  let ok = true;
+  [name, phone, email].forEach(f => { f.classList.remove("field-err"); const m = f.parentElement.querySelector(".err-msg"); if(m) m.remove(); });
+  const fail = (f,msg) => { ok=false; f.classList.add("field-err"); const p=document.createElement("div"); p.className="err-msg"; p.textContent=msg; f.parentElement.appendChild(p); };
+  if (!name.value.trim()) fail(name,"We need a name for the chair");
+  if (!/^[\d\s+()-]{7,}$/.test(phone.value.trim())) fail(phone,"A valid phone number, please");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) fail(email,"Check that email address");
+  if (!ok) return;
+
+  if (slotTaken(booking.date, booking.time, booking.barber)){
+    toast("That slot just went — pick another");
+    goStep(4); return;
+  }
+
+  const s = svc(booking.service);
+  const ref = "OB-" + Math.random().toString(36).slice(2,7).toUpperCase();
+  saveBooking({
+    ref, service:booking.service, style:booking.style, barber:booking.barber,
+    date:booking.date, time:booking.time, mins:s.mins, price:s.price,
+    name:name.value.trim(), phone:phone.value.trim(), email:email.value.trim(),
+    notes:$("#bNotes").value.trim(), created:new Date().toISOString()
+  });
+
+  const bName = booking.barber==="any" ? "first available" : barberById(booking.barber).name;
+  const d = new Date(booking.date + "T12:00:00").toLocaleDateString("en-IE",{weekday:"long",day:"numeric",month:"long"});
+  $("#doneRef").textContent = ref;
+  $("#doneSummary").textContent = `${s.name} with ${bName} — ${d} at ${booking.time}. ${s.mins} minutes. Pay ${money(s.price)} in the shop.`;
+  [1,2,3,4,5].forEach(i => $("#step"+i).hidden = true);
+  $("#donePanel").hidden = false;
+  $$(".step-pill").forEach(p => { p.classList.remove("active"); p.classList.add("done"); });
+  toast("Chair reserved — see you then");
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+$("#againBtn").addEventListener("click", () => {
+  booking.service=booking.style=booking.barber=booking.date=booking.time=null;
+  $$(".pick").forEach(p => p.classList.remove("sel"));
+  $("#toStep2").disabled=$("#toStep3").disabled=$("#toStep4").disabled=$("#toStep5").disabled=true;
+  $("#bName").value=$("#bPhone").value=$("#bEmail").value=$("#bNotes").value="";
+  goStep(1);
+});
+
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3200);
+}
+
+/* start */
+if (booking.service && booking.style) goStep(3);
+else if (booking.service) goStep(2);
+else goStep(1);
+</script>
+</body>
+</html>

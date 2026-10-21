@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Oakwood Barbers — Cuts, Fades &amp; Shaves</title>
+<meta name="description" content="Oakwood Barbers — classic cuts, skin fades, beard sculpting and hot towel shaves. Book your chair online." />
+<link rel="icon" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#171412; --panel:#211c18; --cream:#f2e8d5; --sand:#e6d7bb;
+    --brass:#c9963f; --brass-dim:#a87b2e; --oxblood:#6e2a22;
+    --muted:#9b8d76; --line:#332b23; --white:#fbf7ef;
+    --shadow:0 20px 50px -20px rgba(0,0,0,.55); --radius:12px;
+    --sans:"DM Sans",system-ui,sans-serif; --display:"Bebas Neue",Impact,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth;background:var(--ink);padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}
+  body{font-family:var(--sans);color:var(--cream);background:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);padding-bottom:env(safe-area-inset-bottom)}
+  body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top);background:var(--ink);z-index:99}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+  .wrap{width:min(1140px,92vw);margin-inline:auto}
+  h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.02em;line-height:1}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.3em;font-size:.68rem;color:var(--brass);font-weight:600}
+
+  .announce{background:var(--brass);color:var(--ink);text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;padding:.55rem calc(1rem + env(safe-area-inset-left)) .55rem calc(1rem + env(safe-area-inset-right));padding-top:calc(.55rem + env(safe-area-inset-top));margin-top:calc(-1 * env(safe-area-inset-top));position:relative;z-index:100}
+
+  header{position:sticky;top:0;z-index:60;background:rgba(23,20,18,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
+  .logo{font-family:var(--display);font-size:1.7rem;letter-spacing:.06em;color:var(--cream)}
+  .logo span{color:var(--brass)}
+  .nav-links{display:flex;gap:1.8rem;list-style:none}
+  .nav-links a{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sand);transition:.2s}
+  .nav-links a:hover{color:var(--brass)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:8px;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;transition:.25s;cursor:pointer}
+  .btn-brass{background:var(--brass);color:var(--ink)}
+  .btn-brass:hover{background:var(--cream);transform:translateY(-2px)}
+  .btn-outline{border:1px solid var(--brass);color:var(--brass)}
+  .btn-outline:hover{background:var(--brass);color:var(--ink)}
+  .hamburger{display:none;font-size:1.5rem;color:var(--cream)}
+
+  .hero{padding:5rem 0 4rem;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+  .hero h1{font-size:clamp(3.2rem,7vw,5.6rem);margin:.8rem 0 1.2rem;color:var(--white)}
+  .hero h1 em{font-style:normal;color:var(--brass)}
+  .hero p{color:var(--muted);max-width:46ch;margin-bottom:2rem;font-size:1.05rem}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+  .hero-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:relative}
+  .hero-img img{width:100%;height:520px;object-fit:cover}
+  .hero-badge{position:absolute;bottom:1.2rem;left:1.2rem;background:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.8rem 1.1rem;font-size:.78rem;color:var(--sand)}
+  .hero-badge b{display:block;font-family:var(--display);font-size:1.3rem;letter-spacing:.05em;color:var(--brass)}
+
+  section{padding:4.5rem 0}
+  .sec-head{text-align:center;margin-bottom:3rem}
+  .sec-head h2{font-size:clamp(2.2rem,4vw,3.2rem);margin-top:.6rem;color:var(--white)}
+  .sec-head p{color:var(--muted);max-width:52ch;margin:.8rem auto 0}
+
+  .services{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+  .svc{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem 1.4rem;transition:.25s;display:flex;flex-direction:column;gap:.5rem}
+  .svc:hover{border-color:var(--brass);transform:translateY(-4px)}
+  .svc h3{font-size:1.35rem;color:var(--white)}
+  .svc .price{font-family:var(--display);font-size:1.6rem;color:var(--brass)}
+  .svc .mins{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+  .svc p{font-size:.88rem;color:var(--muted);flex:1}
+
+  .styles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .style-card{border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:var(--shadow);cursor:pointer}
+  .style-card img{width:100%;height:380px;object-fit:cover;transition:.4s}
+  .style-card:hover img{transform:scale(1.04)}
+  .style-meta{position:absolute;inset:auto 0 0 0;padding:1.4rem;background:linear-gradient(transparent,rgba(0,0,0,.88))}
+  .style-meta h3{font-size:1.4rem;color:var(--white)}
+  .style-meta p{font-size:.8rem;color:var(--sand)}
+
+  .barbers{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .barber{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-align:center;padding-bottom:1.6rem;transition:.25s}
+  .barber:hover{border-color:var(--brass)}
+  .barber img{width:100%;height:300px;object-fit:cover;margin-bottom:1.2rem}
+  .barber h3{font-size:1.5rem;color:var(--white)}
+  .barber .role{font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:var(--brass);margin:.3rem 0 .8rem}
+  .barber p{font-size:.86rem;color:var(--muted);padding:0 1.4rem}
+
+  .hours-cta{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+  .hours-cta h2{font-size:2.4rem;color:var(--white);margin-bottom:1rem}
+  .hours-list{list-style:none}
+  .hours-list li{display:flex;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--sand)}
+  .hours-list li.closed{color:var(--muted)}
+  .hours-list .day{font-weight:600}
+  .addr{margin-top:1.4rem;font-size:.9rem;color:var(--muted)}
+  .addr b{color:var(--cream)}
+
+  footer{border-top:1px solid var(--line);padding:3rem 0 2rem;margin-top:2rem}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+  .foot-brand .logo{margin-bottom:.8rem;display:inline-block}
+  .foot-brand p{font-size:.88rem;color:var(--muted);max-width:34ch}
+  .foot-col h4{font-family:var(--display);font-size:1.15rem;letter-spacing:.08em;color:var(--brass);margin-bottom:1rem}
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom:.55rem;font-size:.88rem;color:var(--sand)}
+  .foot-col a:hover{color:var(--brass)}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:1.4rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;font-size:.78rem;color:var(--muted)}
+
+  .toast{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%) translateY(140%);background:var(--brass);color:var(--ink);font-weight:700;font-size:.85rem;padding:.9rem 1.6rem;border-radius:999px;transition:.35s;z-index:200;box-shadow:var(--shadow)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:960px){
+    .hero-grid{grid-template-columns:1fr}
+    .hero-img{order:-1}.hero-img img{height:340px}
+    .services{grid-template-columns:repeat(2,1fr)}
+    .styles-grid{grid-template-columns:repeat(2,1fr)}
+    .barbers{grid-template-columns:1fr}
+    .hours-cta{grid-template-columns:1fr;padding:2rem}
+    .foot-grid{grid-template-columns:1fr}
+    .nav-links{position:absolute;top:100%;left:0;right:0;background:var(--panel);flex-direction:column;gap:0;padding:.6rem 0;border-bottom:1px solid var(--line);display:none}
+    .nav-links.open{display:flex}
+    .nav-links li{padding:.8rem 2rem}
+    .hamburger{display:block}
+    .nav .btn{display:none}
+  }
+  @media(max-width:560px){
+    .services{grid-template-columns:1fr}
+    .styles-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">Walk-ins welcome · Tue–Sat · Book online &amp; skip the wait</div>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">Oakwood <span>Barbers</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#barbers">Our Barbers</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:1rem">
+      <a class="btn btn-brass" href="book.html">Book a chair</a>
+      <button class="hamburger" id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Est. 2014 · Dublin 8</span>
+      <h1>Sharp cuts.<br /><em>No small talk required.</em></h1>
+      <p>Classic cuts, skin fades, beard sculpting and proper hot-towel shaves — booked in 60 seconds, done in 45 minutes.</p>
+      <div class="hero-cta">
+        <a class="btn btn-brass" href="book.html">Book a chair</a>
+        <a class="btn btn-outline" href="#services">See the price list</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://picsum.photos/seed/oak-hero/900/1100" alt="Barber at work in the chair" />
+      <div class="hero-badge"><b>4.9 ★ · 800+ reviews</b>“Best fade in the city.” — every second customer</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The price list</span>
+      <h2>Services</h2>
+      <p>Honest prices, no upsell theatre. Every cut ends with a hot-towel neck clean-up.</p>
+    </div>
+    <div class="services" id="svcGrid"></div>
+  </div>
+</section>
+
+<section id="styles" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Point at the screen</span>
+      <h2>Styles we cut</h2>
+      <p>Not sure what to ask for? Pick any of these when booking — your barber will tailor it to your hair.</p>
+    </div>
+    <div class="styles-grid" id="styleGrid"></div>
+  </div>
+</section>
+
+<section id="barbers">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The team</span>
+      <h2>Who's in the chair</h2>
+    </div>
+    <div class="barbers" id="barberGrid"></div>
+  </div>
+</section>
+
+<section id="visit">
+  <div class="wrap">
+    <div class="hours-cta">
+      <div>
+        <span class="eyebrow">Visit us</span>
+        <h2>Opening hours</h2>
+        <ul class="hours-list" id="hoursList"></ul>
+        <p class="addr"><b>Oakwood Barbers</b><br />14 Thomas Street, Dublin 8<br />01 456 7890 · hello@oakwoodbarbers.ie</p>
+        <a class="btn btn-brass" style="margin-top:1.4rem" href="book.html">Book a chair</a>
+      </div>
+      <div class="hero-img">
+        <img src="https://picsum.photos/seed/oak-shop/800/900" alt="Inside the barbershop" style="height:100%;min-height:360px;object-fit:cover" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="logo">Oakwood <span>Barbers</span></a>
+        <p>Classic barbershop craft on Thomas Street since 2014. Cuts, fades, beards and shaves — walk in or book ahead.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#styles">Styles</a></li>
+          <li><a href="#barbers">Our barbers</a></li>
+          <li><a href="book.html">Book a chair</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+35314567890">01 456 7890</a></li>
+          <li><a href="mailto:hello@oakwoodbarbers.ie">hello@oakwoodbarbers.ie</a></li>
+          <li>14 Thomas St, Dublin 8</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Oakwood Barbers. All rights reserved.</span>
+      <span>Demo booking system — no real appointments are made.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="catalog.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+
+$("#year").textContent = new Date().getFullYear();
+
+/* mobile menu */
+$("#menuBtn").addEventListener("click", () => $("#navLinks").classList.toggle("open"));
+$$("#navLinks a").forEach(a => a.addEventListener("click", () => $("#navLinks").classList.remove("open")));
+
+/* services */
+$("#svcGrid").innerHTML = SERVICES.map(s => `
+  <div class="svc">
+    <span class="mins">${s.mins} min</span>
+    <h3>${s.name}</h3>
+    <span class="price">${money(s.price)}</span>
+    <p>${s.desc}</p>
+    <a class="btn btn-outline" style="align-self:flex-start;padding:.6rem 1.2rem;font-size:.7rem" href="book.html?service=${s.id}">Book</a>
+  </div>`).join("");
+
+/* styles */
+$("#styleGrid").innerHTML = STYLES.slice(0,6).map(s => `
+  <a class="style-card" href="book.html?style=${s.id}">
+    <img src="${s.img}" alt="${s.name}" loading="lazy" />
+    <div class="style-meta"><h3>${s.name}</h3><p>${s.desc}</p></div>
+  </a>`).join("");
+
+/* barbers */
+$("#barberGrid").innerHTML = BARBERS.map(b => `
+  <div class="barber">
+    <img src="${b.img}" alt="${b.name}" loading="lazy" />
+    <h3>${b.name}</h3>
+    <div class="role">${b.role}</div>
+    <p>${b.speciality}</p>
+  </div>`).join("");
+
+/* hours */
+$("#hoursList").innerHTML = HOURS.map(h => `
+  <li class="${h.open ? "" : "closed"}">
+    <span class="day">${h.day}</span>
+    <span>${h.open ? h.open[0] + " – " + h.open[1] : "Closed"}</span>
+  </li>`).join("");
+
+function toast(msg){
+  const t = $("#toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 3200);
+}
+</script>
+</body>
+</html>
