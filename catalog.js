@@ -24,20 +24,48 @@ const STYLES = [
 ];
 
 const BARBERS = [
-  { id:"marcus", name:"Farhan Iqbal",  role:"Master Barber & founder · 14 yrs",  img:"https://picsum.photos/seed/farhan-marcus/400/400", speciality:"Fades, scissor work and making nervous first-timers relax." },
+  { id:"marcus", name:"Farhan",        role:"Master Barber & founder",  img:"https://picsum.photos/seed/farhan-marcus/400/400", speciality:"Fades, scissor work and making nervous first-timers relax." },
   { id:"elliot", name:"Elliot Byrne",  role:"Senior Barber · 9 yrs",   img:"https://picsum.photos/seed/farhan-elliot/400/400", speciality:"Beard architecture, hot towel shaves and classic side parts." },
   { id:"niall",  name:"Niall Duffy",   role:"Barber · 4 yrs",          img:"https://picsum.photos/seed/farhan-niall/400/400",  speciality:"Textured crops, curly hair and the fastest fade in the shop." },
 ];
 
-const HOURS = [
-  { day:"Monday",    open:null },
-  { day:"Tuesday",   open:["09:00","18:00"] },
-  { day:"Wednesday", open:["09:00","19:00"] },
-  { day:"Thursday",  open:["09:00","20:00"] },
-  { day:"Friday",    open:["09:00","20:00"] },
-  { day:"Saturday",  open:["08:30","17:00"] },
-  { day:"Sunday",    open:null },
+/* Real customer reviews — public sources (reviewbritain / localitybiz) */
+const REVIEWS = [
+  { text:"Perfect haircut every time — I love the way he uses the trimmer. The face looks refreshed every time!", who:"Manish" },
+  { text:"Top quality barber, great customer service. Best in Limerick, would recommend.", who:"Brían" },
+  { text:"Always coming out of there looking fresh, very reliable. Would highly recommend.", who:"James" },
+  { text:"Very nice and easy to deal with — he knows the customer's haircut without asking.", who:"Jack" },
+  { text:"Nice haircuts all the time. Highly recommend it — best barber in Limerick.", who:"Kyle" },
+  { text:"Amazing barber, friendly and welcoming and professional at every level. Top notch.", who:"Verified customer" },
 ];
+
+/* Real opening hours — public listing: findglocal (53 Roches St, Limerick) */
+const HOURS = [
+  { day:"Monday",    open:["09:00","19:00"] },
+  { day:"Tuesday",   open:["09:00","19:00"] },
+  { day:"Wednesday", open:["09:00","19:00"] },
+  { day:"Thursday",  open:["09:00","19:00"] },
+  { day:"Friday",    open:["09:00","19:00"] },
+  { day:"Saturday",  open:["09:00","19:00"] },
+  { day:"Sunday",    open:["10:30","19:00"] },
+];
+
+/* Verified public business details (Limerick Fades) */
+const SHOP = {
+  name:"Farhan Fades",
+  tradingAs:"Limerick Fades",
+  street:"53 Roches St, Prior's-Land",
+  city:"Limerick",
+  eircode:"V94 XP83",
+  country:"Ireland",
+  phone:"+353 83 312 6955",
+  phoneTel:"+353833126955",
+  phoneOld:"+353 83 146 9595",
+  rating:4.6,
+  reviews:126,
+  facebook:"https://www.facebook.com/akhtarbarber",
+  maps:"https://maps.google.com/?q=53+Roches+St,+Limerick,+V94+XP83",
+};
 
 const money = n => `$${n}`;
 const svc = id => SERVICES.find(s => s.id === id);
@@ -66,7 +94,7 @@ function slotTaken(dateStr, timeStr, barberId) {
   );
 }
 
-/* Generate time slots for a given date (Tue–Sat opening hours) */
+/* Generate time slots for a given date (open 7 days — see HOURS) */
 function slotsFor(dateStr) {
   const d = new Date(dateStr + "T12:00:00");
   const day = d.getDay(); // 0=Sun … 6=Sat

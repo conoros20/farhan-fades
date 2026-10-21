@@ -85,6 +85,12 @@
   .barber .role{font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;color:var(--red);margin:.3rem 0 .8rem}
   .barber p{font-size:.86rem;color:var(--muted);padding:0 1.4rem}
 
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+  .review{background:var(--ink);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem;display:flex;flex-direction:column;gap:.8rem}
+  .review .stars{color:var(--red);letter-spacing:.1em;font-size:.9rem}
+  .review p{font-size:.92rem;color:var(--sand);flex:1}
+  .review .who{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+
   .hours-cta{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
   .hours-cta h2{font-size:2.4rem;color:var(--white);margin-bottom:1rem}
   .hours-list{list-style:none}
@@ -112,6 +118,7 @@
     .hero-img{order:-1}.hero-img img{height:340px}
     .services{grid-template-columns:repeat(2,1fr)}
     .styles-grid{grid-template-columns:repeat(2,1fr)}
+    .reviews{grid-template-columns:1fr}
     .barbers{grid-template-columns:1fr}
     .hours-cta{grid-template-columns:1fr;padding:2rem}
     .foot-grid{grid-template-columns:1fr}
@@ -150,9 +157,9 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Est. 2014 · Dublin 8</span>
+      <span class="eyebrow">Est. Limerick · 53 Roches St</span>
       <h1>Sharp cuts.<br /><em>No small talk required.</em></h1>
-      <p>Classic cuts, skin fades, beard sculpting and proper hot-towel shaves — booked in 60 seconds, done in 45 minutes.</p>
+      <p>Classic cuts, skin fades, beard sculpting and proper hot-towel shaves — rated 4.6★ from 126 reviews in the heart of Limerick city.</p>
       <div class="hero-cta">
         <a class="btn btn-red" href="book.html">Book a chair</a>
         <a class="btn btn-outline" href="#services">See the price list</a>
@@ -160,7 +167,7 @@
     </div>
     <div class="hero-img">
       <img src="https://picsum.photos/seed/farhan-hero/900/1100" alt="Barber at work in the chair" />
-      <div class="hero-badge"><b>4.9 ★ · 800+ reviews</b>“Best fade in the city.” — every second customer</div>
+      <div class="hero-badge"><b>4.6 ★ · 126 reviews</b>“Best barber in Limerick.” — verified customers</div>
     </div>
   </div>
 </section>
@@ -197,6 +204,17 @@
   </div>
 </section>
 
+<section id="reviews" style="background:var(--panel)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">4.6 ★ from 126 reviews</span>
+      <h2>What Limerick says</h2>
+      <p>Real reviews from verified customers on Google and public directories.</p>
+    </div>
+    <div class="reviews" id="reviewGrid"></div>
+  </div>
+</section>
+
 <section id="visit">
   <div class="wrap">
     <div class="hours-cta">
@@ -204,7 +222,7 @@
         <span class="eyebrow">Visit us</span>
         <h2>Opening hours</h2>
         <ul class="hours-list" id="hoursList"></ul>
-        <p class="addr"><b>Farhan Fades</b><br />14 Thomas Street, Dublin 8<br />01 456 7890 · hello@farhanfades.ie</p>
+        <p class="addr"><b>Farhan Fades</b> <span style="color:var(--muted)">(Limerick Fades)</span><br />53 Roches St, Prior's-Land<br />Limerick, V94 XP83<br /><a href="tel:+353833126955">083 312 6955</a></p>
         <a class="btn btn-red" style="margin-top:1.4rem" href="book.html">Book a chair</a>
       </div>
       <div class="hero-img">
@@ -219,7 +237,7 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="#" class="logo">Farhan <span>Fades</span></a>
-        <p>Classic barbershop craft on Thomas Street since 2014. Cuts, fades, beards and shaves — walk in or book ahead.</p>
+        <p>Classic barbershop craft on Roches Street, Limerick. Cuts, fades, beards and shaves — walk in or book ahead.</p>
       </div>
       <div class="foot-col">
         <h4>Shop</h4>
@@ -233,9 +251,9 @@
       <div class="foot-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="tel:+35314567890">01 456 7890</a></li>
-          <li><a href="mailto:hello@farhanfades.ie">hello@farhanfades.ie</a></li>
-          <li>14 Thomas St, Dublin 8</li>
+          <li><a href="tel:+353833126955">083 312 6955</a></li>
+          <li><a href="https://www.facebook.com/akhtarbarber" target="_blank" rel="noopener">Facebook</a></li>
+          <li>53 Roches St, Limerick, V94 XP83</li>
         </ul>
       </div>
     </div>
@@ -291,6 +309,14 @@ $("#hoursList").innerHTML = HOURS.map(h => `
     <span class="day">${h.day}</span>
     <span>${h.open ? h.open[0] + " – " + h.open[1] : "Closed"}</span>
   </li>`).join("");
+
+/* reviews */
+$("#reviewGrid").innerHTML = REVIEWS.map(r => `
+  <div class="review">
+    <div class="stars">★★★★★</div>
+    <p>“${r.text}”</p>
+    <div class="who">— ${r.who}</div>
+  </div>`).join("");
 
 function toast(msg){
   const t = $("#toast");
