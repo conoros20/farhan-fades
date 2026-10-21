@@ -1,4 +1,4 @@
-/* -------------------- Oakwood Barbers — shared data -------------------- */
+/* -------------------- Farhan Fades — shared data -------------------- */
 
 const SERVICES = [
   { id:"classic",   name:"Classic Cut",      price:25, mins:30, desc:"Scissor or clipper cut, finished with a hot towel neck clean-up." },
@@ -12,21 +12,21 @@ const SERVICES = [
 ];
 
 const STYLES = [
-  { id:"textured", name:"Textured Crop",    img:"https://picsum.photos/seed/oak-crop/600/750",    desc:"Low-maintenance, high-impact. Works with almost any hair type." },
-  { id:"pompadour",name:"Pompadour",        img:"https://picsum.photos/seed/oak-pomp/600/750",    desc:"Volume on top, tight sides. A classic that still turns heads." },
-  { id:"fade",     name:"Skin Fade",        img:"https://picsum.photos/seed/oak-fade/600/750",    desc:"Sharp, clean, grows out well. Ask for low, mid or high." },
-  { id:"undercut", name:"Undercut",         img:"https://picsum.photos/seed/oak-under/600/750",   desc:"Disconnected length on top with clipper-shaved sides." },
-  { id:"slick",    name:"Slick Back",       img:"https://picsum.photos/seed/oak-slick/600/750",   desc:"Business in the front, party never. Holds with a matte paste." },
-  { id:"quiff",    name:"Messy Quiff",      img:"https://picsum.photos/seed/oak-quiff/600/750",   desc:"Lived-in height, effortless-looking — actually takes 4 minutes." },
-  { id:"sidepart", name:"Side Part",        img:"https://picsum.photos/seed/oak-part/600/750",    desc:"A hard or soft part with a gentleman's finish. Wedding favourite." },
-  { id:"buzz",     name:"Buzz Cut",         img:"https://picsum.photos/seed/oak-buzz/600/750",    desc:"Zero effort, maximum summer. Ask for a skin fade version." },
-  { id:"curly",    name:"Curly Top",        img:"https://picsum.photos/seed/oak-curly/600/750",   desc:"We cut curls dry, shape by shape — never a number guard." },
+  { id:"textured", name:"Textured Crop",    img:"https://picsum.photos/seed/farhan-crop/600/750",    desc:"Low-maintenance, high-impact. Works with almost any hair type." },
+  { id:"pompadour",name:"Pompadour",        img:"https://picsum.photos/seed/farhan-pomp/600/750",    desc:"Volume on top, tight sides. A classic that still turns heads." },
+  { id:"fade",     name:"Skin Fade",        img:"https://picsum.photos/seed/farhan-fade/600/750",    desc:"Sharp, clean, grows out well. Ask for low, mid or high." },
+  { id:"undercut", name:"Undercut",         img:"https://picsum.photos/seed/farhan-under/600/750",   desc:"Disconnected length on top with clipper-shaved sides." },
+  { id:"slick",    name:"Slick Back",       img:"https://picsum.photos/seed/farhan-slick/600/750",   desc:"Business in the front, party never. Holds with a matte paste." },
+  { id:"quiff",    name:"Messy Quiff",      img:"https://picsum.photos/seed/farhan-quiff/600/750",   desc:"Lived-in height, effortless-looking — actually takes 4 minutes." },
+  { id:"sidepart", name:"Side Part",        img:"https://picsum.photos/seed/farhan-part/600/750",    desc:"A hard or soft part with a gentleman's finish. Wedding favourite." },
+  { id:"buzz",     name:"Buzz Cut",         img:"https://picsum.photos/seed/farhan-buzz/600/750",    desc:"Zero effort, maximum summer. Ask for a skin fade version." },
+  { id:"curly",    name:"Curly Top",        img:"https://picsum.photos/seed/farhan-curly/600/750",   desc:"We cut curls dry, shape by shape — never a number guard." },
 ];
 
 const BARBERS = [
-  { id:"marcus", name:"Marcus Quinn",  role:"Master Barber · 14 yrs",  img:"https://picsum.photos/seed/oak-marcus/400/400", speciality:"Fades, scissor work and making nervous first-timers relax." },
-  { id:"elliot", name:"Elliot Byrne",  role:"Senior Barber · 9 yrs",   img:"https://picsum.photos/seed/oak-elliot/400/400", speciality:"Beard architecture, hot towel shaves and classic side parts." },
-  { id:"niall",  name:"Niall Duffy",   role:"Barber · 4 yrs",          img:"https://picsum.photos/seed/oak-niall/400/400",  speciality:"Textured crops, curly hair and the fastest fade in the shop." },
+  { id:"marcus", name:"Farhan Iqbal",  role:"Master Barber & founder · 14 yrs",  img:"https://picsum.photos/seed/farhan-marcus/400/400", speciality:"Fades, scissor work and making nervous first-timers relax." },
+  { id:"elliot", name:"Elliot Byrne",  role:"Senior Barber · 9 yrs",   img:"https://picsum.photos/seed/farhan-elliot/400/400", speciality:"Beard architecture, hot towel shaves and classic side parts." },
+  { id:"niall",  name:"Niall Duffy",   role:"Barber · 4 yrs",          img:"https://picsum.photos/seed/farhan-niall/400/400",  speciality:"Textured crops, curly hair and the fastest fade in the shop." },
 ];
 
 const HOURS = [
@@ -45,7 +45,7 @@ const styleById = id => STYLES.find(s => s.id === id);
 const barberById = id => BARBERS.find(b => b.id === id);
 
 /* -------------------- booking storage (localStorage) -------------------- */
-const BOOK_KEY = "oakwood.bookings";
+const BOOK_KEY = "farhan.bookings";
 
 function loadBookings() {
   try { return JSON.parse(localStorage.getItem(BOOK_KEY)) || []; }
