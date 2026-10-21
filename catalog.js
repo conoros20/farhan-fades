@@ -12,21 +12,21 @@ const SERVICES = [
 ];
 
 const STYLES = [
-  { id:"textured", name:"Textured Crop",    img:"https://picsum.photos/seed/farhan-crop/600/750",    desc:"Low-maintenance, high-impact. Works with almost any hair type." },
-  { id:"pompadour",name:"Pompadour",        img:"https://picsum.photos/seed/farhan-pomp/600/750",    desc:"Volume on top, tight sides. A classic that still turns heads." },
-  { id:"fade",     name:"Skin Fade",        img:"https://picsum.photos/seed/farhan-fade/600/750",    desc:"Sharp, clean, grows out well. Ask for low, mid or high." },
-  { id:"undercut", name:"Undercut",         img:"https://picsum.photos/seed/farhan-under/600/750",   desc:"Disconnected length on top with clipper-shaved sides." },
-  { id:"slick",    name:"Slick Back",       img:"https://picsum.photos/seed/farhan-slick/600/750",   desc:"Business in the front, party never. Holds with a matte paste." },
-  { id:"quiff",    name:"Messy Quiff",      img:"https://picsum.photos/seed/farhan-quiff/600/750",   desc:"Lived-in height, effortless-looking — actually takes 4 minutes." },
-  { id:"sidepart", name:"Side Part",        img:"https://picsum.photos/seed/farhan-part/600/750",    desc:"A hard or soft part with a gentleman's finish. Wedding favourite." },
-  { id:"buzz",     name:"Buzz Cut",         img:"https://picsum.photos/seed/farhan-buzz/600/750",    desc:"Zero effort, maximum summer. Ask for a skin fade version." },
-  { id:"curly",    name:"Curly Top",        img:"https://picsum.photos/seed/farhan-curly/600/750",   desc:"We cut curls dry, shape by shape — never a number guard." },
+  { id:"textured", name:"Textured Crop",    img:"https://images.pexels.com/photos/8736106/pexels-photo-8736106.jpeg?auto=compress&cs=tinysrgb&w=600",  desc:"Low-maintenance, high-impact. Works with almost any hair type." },
+  { id:"pompadour",name:"Pompadour",        img:"https://images.pexels.com/photos/16780712/pexels-photo-16780712.jpeg?auto=compress&cs=tinysrgb&w=600",desc:"Volume on top, tight sides. A classic that still turns heads." },
+  { id:"fade",     name:"Skin Fade",        img:"https://images.pexels.com/photos/12464841/pexels-photo-12464841.jpeg?auto=compress&cs=tinysrgb&w=600",desc:"Sharp, clean, grows out well. Ask for low, mid or high." },
+  { id:"undercut", name:"Undercut",         img:"https://images.pexels.com/photos/30782416/pexels-photo-30782416.jpeg?auto=compress&cs=tinysrgb&w=600",desc:"Disconnected length on top with clipper-shaved sides." },
+  { id:"slick",    name:"Slick Back",       img:"https://images.pexels.com/photos/2775272/pexels-photo-2775272.jpeg?auto=compress&cs=tinysrgb&w=600",  desc:"Business in the front, party never. Holds with a matte paste." },
+  { id:"quiff",    name:"Messy Quiff",      img:"https://images.pexels.com/photos/30558488/pexels-photo-30558488.jpeg?auto=compress&cs=tinysrgb&w=600",desc:"Lived-in height, effortless-looking — actually takes 4 minutes." },
+  { id:"sidepart", name:"Side Part",        img:"https://images.pexels.com/photos/7697216/pexels-photo-7697216.jpeg?auto=compress&cs=tinysrgb&w=600",  desc:"A hard or soft part with a gentleman's finish. Wedding favourite." },
+  { id:"buzz",     name:"Buzz Cut",         img:"https://images.pexels.com/photos/9992817/pexels-photo-9992817.jpeg?auto=compress&cs=tinysrgb&w=600",  desc:"Zero effort, maximum summer. Ask for a skin fade version." },
+  { id:"curly",    name:"Curly Top",        img:"https://images.pexels.com/photos/4625627/pexels-photo-4625627.jpeg?auto=compress&cs=tinysrgb&w=600",  desc:"We cut curls dry, shape by shape — never a number guard." },
 ];
 
 const BARBERS = [
-  { id:"marcus", name:"Farhan",        role:"Master Barber & founder",  img:"https://picsum.photos/seed/farhan-marcus/400/400", speciality:"Fades, scissor work and making nervous first-timers relax." },
-  { id:"elliot", name:"Elliot Byrne",  role:"Senior Barber · 9 yrs",   img:"https://picsum.photos/seed/farhan-elliot/400/400", speciality:"Beard architecture, hot towel shaves and classic side parts." },
-  { id:"niall",  name:"Niall Duffy",   role:"Barber · 4 yrs",          img:"https://picsum.photos/seed/farhan-niall/400/400",  speciality:"Textured crops, curly hair and the fastest fade in the shop." },
+  { id:"marcus", name:"Farhan",        role:"Master Barber & founder",  img:"https://images.pexels.com/photos/18483777/pexels-photo-18483777.jpeg?auto=compress&cs=tinysrgb&w=400", speciality:"Fades, scissor work and making nervous first-timers relax." },
+  { id:"elliot", name:"Ahmed",          role:"Senior Barber · 9 yrs",    img:"https://images.pexels.com/photos/16030380/pexels-photo-16030380.jpeg?auto=compress&cs=tinysrgb&w=400", speciality:"Beard architecture, hot towel shaves and classic side parts." },
+  { id:"niall",  name:"Sanjay",         role:"Barber · 4 yrs",           img:"https://images.pexels.com/photos/14781974/pexels-photo-14781974.jpeg?auto=compress&cs=tinysrgb&w=400", speciality:"Textured crops, curly hair and the fastest fade in the shop." },
 ];
 
 /* Real customer reviews — public sources (reviewbritain / localitybiz) */
@@ -58,14 +58,14 @@ const VOUCHERS = [
 ];
 
 const GALLERY = [
-  { img:"https://picsum.photos/seed/farhan-g1/600/600", alt:"Skin fade with textured top" },
-  { img:"https://picsum.photos/seed/farhan-g2/600/600", alt:"Classic scissor cut" },
-  { img:"https://picsum.photos/seed/farhan-g3/600/600", alt:"Beard sculpt and line-up" },
-  { img:"https://picsum.photos/seed/farhan-g4/600/600", alt:"Pompadour with taper" },
-  { img:"https://picsum.photos/seed/farhan-g5/600/600", alt:"Buzz cut with skin fade sides" },
-  { img:"https://picsum.photos/seed/farhan-g6/600/600", alt:"Curly top shape-up" },
-  { img:"https://picsum.photos/seed/farhan-g7/600/600", alt:"Side part and hot towel finish" },
-  { img:"https://picsum.photos/seed/farhan-g8/600/600", alt:"Textured crop with fringe" },
+  { img:"https://images.pexels.com/photos/12464841/pexels-photo-12464841.jpeg?auto=compress&cs=tinysrgb&w=600", alt:"Skin fade with textured top" },
+  { img:"https://images.pexels.com/photos/7697216/pexels-photo-7697216.jpeg?auto=compress&cs=tinysrgb&w=600",  alt:"Classic scissor cut" },
+  { img:"https://images.pexels.com/photos/3998417/pexels-photo-3998417.jpeg?auto=compress&cs=tinysrgb&w=600",  alt:"Beard sculpt and line-up" },
+  { img:"https://images.pexels.com/photos/16780712/pexels-photo-16780712.jpeg?auto=compress&cs=tinysrgb&w=600",alt:"Pompadour with taper" },
+  { img:"https://images.pexels.com/photos/9992817/pexels-photo-9992817.jpeg?auto=compress&cs=tinysrgb&w=600",  alt:"Buzz cut with skin fade sides" },
+  { img:"https://images.pexels.com/photos/4625627/pexels-photo-4625627.jpeg?auto=compress&cs=tinysrgb&w=600",  alt:"Curly top shape-up" },
+  { img:"https://images.pexels.com/photos/2076931/pexels-photo-2076931.jpeg?auto=compress&cs=tinysrgb&w=600",  alt:"Side part and hot towel finish" },
+  { img:"https://images.pexels.com/photos/8736106/pexels-photo-8736106.jpeg?auto=compress&cs=tinysrgb&w=600",  alt:"Textured crop with fringe" },
 ];
 
 /* Real opening hours — public listing: findglocal (53 Roches St, Limerick) */
