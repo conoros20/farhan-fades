@@ -304,16 +304,34 @@ $("#toStep5").addEventListener("click", () => goStep(5));
 $$("[data-back]").forEach(b => b.addEventListener("click", () => goStep(+b.dataset.back)));
 
 /* ---------- dates & slots ---------- */
+function hasBookableSlot(dateKey){
+  const slots = slotsFor(dateKey);
+  if (!slots.length) return false;
+  const now = new Date();
+  const isToday = dateKey === now.toISOString().slice(0,10);
+  if (!isToday) return true;
+  const nowMin = now.getHours()*60 + now.getMinutes();
+  return slots.some(t => { const [h,m] = t.split(":").map(Number); return (h*60+m) >= nowMin + 60; });
+}
+
 function renderDates(){
   const chips = $("#dateChips");
   chips.innerHTML = "";
   const today = new Date();
-  let shown = 0;
-  for (let i=0; i<21 && shown<10; i++){
+  const days = [];
+  for (let i=0; i<21 && days.length<10; i++){
     const d = new Date(today); d.setDate(today.getDate()+i);
     const key = d.toISOString().slice(0,10);
-    const slots = slotsFor(key);
-    if (!slots.length) continue; // closed days skipped
+    if (!hasBookableSlot(key)) continue; // skip closed / fully-past days
+    days.push({ key, i, d });
+  }
+  /* if today has no bookable slots, don't leave a dead "Today" selected */
+  if (booking.date && !days.some(x => x.key === booking.date)){
+    booking.date = days[0] ? days[0].key : null;
+    booking.time = null;
+  }
+  if (!booking.date && days.length) booking.date = days[0].key;
+  days.forEach(({ key, i, d }) => {
     const label = i===0 ? "Today" : i===1 ? "Tomorrow" : d.toLocaleDateString("en-IE",{weekday:"short",day:"numeric",month:"short"});
     const chip = document.createElement("button");
     chip.className = "chip" + (booking.date===key ? " sel" : "");
@@ -326,10 +344,9 @@ function renderDates(){
       $("#toStep5").disabled = true;
     });
     chips.appendChild(chip);
-    shown++;
-  }
+  });
   if (booking.date) renderSlots(booking.date);
-  else { $("#slotWrap").hidden = true; $("#closedMsg").hidden = true; }
+  else { $("#slotWrap").hidden = true; $("#closedMsg").hidden = false; }
 }
 
 function renderSlots(dateKey){
